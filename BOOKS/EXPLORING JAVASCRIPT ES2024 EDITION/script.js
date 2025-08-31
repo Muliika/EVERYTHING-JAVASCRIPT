@@ -56,3 +56,70 @@ let notOperator = !true; // false
 // Control Structures:
 // JavaScript provides various control structures including:
 // Conditional statements: if, else if, else, switch
+let score = 85;
+if (score >= 90) {
+  console.log("A");
+} else if (score >= 80) {
+  console.log("B");
+} else if (score >= 70) {
+  console.log("C");
+} else {
+  console.log("F");
+}
+let day = 3;
+switch (day) {
+  case 1:
+    console.log("Monday");
+    break;
+    case 2:
+    console.log("Tuesday");
+    break;
+    case 3:
+    console.log("Wednesday");
+    break;
+    case 4:
+    console.log("Thursday");
+    break;
+    case 5:
+    console.log("Friday");
+    break;
+    case 6:
+    console.log("Saturday");
+    break;
+    case 7:
+    console.log("Sunday");
+    break;
+    default:
+    console.log("Invalid day");
+}
+// Loops: for, while, do...while, for...in, for...of
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+let j = 0;
+while (j < 5) {
+    console.log(j);
+    j++;
+}
+let k = 0;
+do {
+    console.log(k);
+    k++;
+} while (k < 5);
+let person = { name: "Bob", age: 28 };
+for (let key in person) {
+    console.log(key + ": " + person[key]);
+}
+let numbers = [10, 20, 30, 40, 50];
+for (let num of numbers) {
+    console.log(num);
+}
+// Functions:
+// Functions are blocks of code designed to perform a particular task. They are executed when "called" or "invoked".
+function add(a, b) {
+    return a + b;
+}
+let result = add(5, 3);
+console.log(result); // Output: 8
+// Arrow Functions (ES6):
+const multiply = (a, b) => a * b;
