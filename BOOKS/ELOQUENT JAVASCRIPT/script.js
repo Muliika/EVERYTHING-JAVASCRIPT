@@ -208,3 +208,111 @@ printFarmInventory(5, 10, 2);
 // Each helper function has a single responsibility, which makes it easier to test and debug individual parts of the code.
 // This approach also allows for better organization of code, especially as functions grow in complexity and size.
 // Overall, growing functions by adding helper functions is a common practice in software development that enhances code quality and maintainability.
+
+// DATA STRUCTURES, OBJECTS & ARRAYS
+// Numbers, Booleans, and strings are the atoms from which data structures are built. Many types of information require more than one atom, though. Objects allow us to group values—including other objects—to build more complex structures.
+// DATASETS
+//  JavaScript provides a data type specifically for storing sequences of values. It is called an array and is written as a list of values between square brackets, separated by commas.
+let listOfNumbers = [2, 3, 5, 7, 11];
+console.log(listOfNumbers[2]); // 5
+// The values in an array can be of any type, and they do not all have to be of the same type. An array can even hold other arrays.
+let listOfThings = ["cat", 3, false, [2, 3]];
+console.log(listOfThings[3]); // [2, 3]
+console.log(listOfThings[3][0]); // 2 
+// The length property of an array tells you how many elements it contains.
+console.log(listOfThings.length); // 4
+// The last element of an array is at the position length - 1, because the first element is at position 0.
+console.log(listOfThings[listOfThings.length - 1]); // [2, 3]
+// You can change elements of an array using assignment.
+listOfThings[1] = "three";
+console.log(listOfThings); // ["cat", "three", false, [2, 3]]
+// You can also add new elements to the end of an array using the push method.
+listOfThings.push("dog");
+console.log(listOfThings); // ["cat", "three", false, [2, 3], "dog"]
+// The pop method removes the last element from an array and returns it.
+let last = listOfThings.pop();
+console.log(last); // "dog"
+console.log(listOfThings); // ["cat", "three", false, [2, 3]]
+// The shift method removes the first element from an array and returns it.
+let first = listOfThings.shift();
+console.log(first); // "cat"
+console.log(listOfThings); // ["three", false, [2, 3]]
+// The unshift method adds one or more elements to the beginning of an array.
+listOfThings.unshift("cat");  
+console.log(listOfThings); // ["cat", "three", false, [2, 3]]
+// The splice method can be used to add or remove elements from an array at a specific index.
+listOfThings.splice(1, 1, "two", "three");
+console.log(listOfThings); // ["cat", "two", "three", false, [2, 3]]
+// The first argument is the index at which to start changing the array, the second argument is the number of elements to remove, and the remaining arguments are the elements to add.
+// If the second argument is 0, no elements are removed.
+// If it is omitted, all elements from the start index to the end of the array are removed.
+// The slice method can be used to create a new array that is a subset of an existing array.
+let newArray = listOfThings.slice(1, 3);
+console.log(newArray);
+// ["two", "three"]
+// The first argument is the index at which to start the slice, and the second argument is the index at which to end the slice (not inclusive).
+// If the second argument is omitted, the slice goes to the end of the array.
+// If the first argument is negative, it counts from the end of the array.
+// If the second argument is negative, it counts from the end of the array as well.
+let anotherArray = listOfThings.slice(-3);
+console.log(anotherArray); // ["three", false, [2, 3]]
+// The forEach method can be used to execute a function for each element in an array.
+listOfThings.forEach((element, index) => {
+  console.log(`${index}: ${element}`);
+});
+// 0: cat
+// 1: two
+// 2: three
+// 3: false
+// 4: 2,3
+// The map method can be used to create a new array by applying a function to each element in an existing array.
+let uppercased = listOfThings.map(element => {
+  if (typeof element === "string") {
+    return element.toUpperCase();
+  }
+  return element;
+});
+console.log(uppercased);
+// ["CAT", "TWO", "THREE", false, [2, 3]]
+// The filter method can be used to create a new array containing only the elements that pass a certain test.
+let stringsOnly = listOfThings.filter(element => typeof element === "string");
+console.log(stringsOnly); // ["cat", "two", "three"]
+// The find method can be used to find the first element in an array that passes a certain test.
+let firstString = listOfThings.find(element => typeof element === "string");
+console.log(firstString); // "cat"
+// The findIndex method can be used to find the index of the first element in an array that passes a certain test.
+let firstStringIndex = listOfThings.findIndex(element => typeof element === "string");
+console.log(firstStringIndex); // 0
+// The some method can be used to test whether at least one element in an array passes a certain test.
+let hasString = listOfThings.some(element => typeof element === "string");
+console.log(hasString); // true
+// The every method can be used to test whether all elements in an array pass a certain test.
+let allStrings = listOfThings.every(element => typeof element === "string");
+console.log(allStrings); // false
+// The reduce method can be used to reduce an array to a single value by applying a function to each element in the array.
+let totalLength = listOfThings.reduce((accumulator, element) => {
+  if (typeof element === "string") {
+    return accumulator + element.length;
+  }
+  return accumulator;
+}, 0);
+console.log(totalLength); // 10
+// The first argument is a function that takes an accumulator and the current element as arguments and returns the new value of the accumulator.
+// The second argument is the initial value of the accumulator.
+// The reduceRight method works like reduce, but it processes the array from right to left.
+let totalLengthRight = listOfThings.reduceRight((accumulator, element) => {
+  if (typeof element === "string") {
+    return accumulator + element.length;
+  }
+  return accumulator;
+}, 0);
+console.log(totalLengthRight); // 10
+// The concat method can be used to create a new array by concatenating two or more arrays.
+let moreThings = ["dog", "cat"];
+let combined = listOfThings.concat(moreThings);
+console.log(combined); // ["cat", "two", "three", false, [2, 3], "dog", "cat"]
+// The join method can be used to create a string by joining all elements of an array with a specified separator.
+let joined = listOfThings.join(", ");
+console.log(joined); // "cat, two, three, false, 2,3"
+// The reverse method can be used to reverse the order of elements in an array.
+listOfThings.reverse();
