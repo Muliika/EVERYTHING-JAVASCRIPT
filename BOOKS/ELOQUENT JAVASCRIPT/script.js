@@ -316,3 +316,50 @@ let joined = listOfThings.join(", ");
 console.log(joined); // "cat, two, three, false, 2,3"
 // The reverse method can be used to reverse the order of elements in an array.
 listOfThings.reverse();
+
+
+// CHAPTER 5 
+// HIGHER ORDER FUNCTIONS
+// Functions that operate on other functions, either by taking them as arguments or by returning them, are called higher-order functions.
+// The map function takes an array and a function as arguments. It applies the function to each element of the array and returns a new array containing the results.
+let numbers = [1, 2, 3, 4, 5];
+let doubled = numbers.map(n => n * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+// The filter function takes an array and a predicate function as arguments. It returns a new array containing only the elements for which the predicate function returns true.
+let even = numbers.filter(n => n % 2 === 0);
+console.log(even); // [2, 4]
+// The reduce function takes an array, a reducer function, and an initial value as arguments. It applies the reducer function to each element of the array, accumulating a single result.
+let sumReducer = numbers.reduce((acc, n) => acc + n, 0);
+console.log(sumReducer); // 15
+// The forEach function takes an array and a function as arguments. It applies the function to each element of the array, but does not return a new array.
+numbers.forEach(n => console.log(n));
+// 1 
+// 2
+// 3
+// 4
+// 5
+// The some function takes an array and a predicate function as arguments. It returns true if at least one element of the array satisfies the predicate function.
+let hasEven = numbers.some(n => n % 2 === 0);
+console.log(hasEven); // true
+// The every function takes an array and a predicate function as arguments. It returns true if all elements of the array satisfy the predicate function.
+let allEven = numbers.every(n => n % 2 === 0);
+console.log(allEven); // false
+// The find function takes an array and a predicate function as arguments. It returns the first element of the array that satisfies the predicate function, or undefined if no such element is found.
+let firstEven = numbers.find(n => n % 2 === 0);
+console.log(firstEven); // 2
+// The findIndex function takes an array and a predicate function as arguments. It returns the index of the first element of the array that satisfies the predicate function, or -1 if no such element is found.
+let firstEvenIndex = numbers.findIndex(n => n % 2 === 0);
+console.log(firstEvenIndex); // 1
+// The sort function takes an array and a comparison function as arguments. It sorts the elements of the array in place according to the comparison function.
+let unsorted = [3, 1, 4, 1, 5, 9, 2, 6, 5];
+unsorted.sort((a, b) => a - b);
+console.log(unsorted); // [1, 1, 2, 3, 4, 5, 5, 6, 9]
+// The comparison function should return a negative number if the first argument is less than the second, a positive number if the first argument is greater than the second, and 0 if they are equal.
+// The flatMap function takes an array and a function as arguments. It applies the function to each element of the array and flattens the result into a new array.
+let nested = [[1, 2], [3, 4], [5]];
+let flattened = nested.flatMap(arr => arr);
+console.log(flattened); // [1, 2, 3, 4, 5]
+// The function should return an array for each element of the input array, and the resulting arrays will be concatenated into a single array.
+// Higher-order functions are a powerful way to abstract and compose behavior in JavaScript, allowing you to write more concise and expressive code.
+// They are widely used in functional programming and can help you create reusable and modular components in your applications.
+
