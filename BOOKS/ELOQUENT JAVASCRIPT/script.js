@@ -363,3 +363,144 @@ console.log(flattened); // [1, 2, 3, 4, 5]
 // Higher-order functions are a powerful way to abstract and compose behavior in JavaScript, allowing you to write more concise and expressive code.
 // They are widely used in functional programming and can help you create reusable and modular components in your applications.
 
+// CHAPTER 6
+// THE SECRET LIFE OF OBJECTS
+
+// Objects are a way to group related data and functionality together.
+// They are collections of properties, where each property is a key-value pair.
+// The key is a string (or symbol) that identifies the property, and the value can be any JavaScript value, including other objects or functions.
+let rabbit = {
+  type: "rabbit",
+  name: "Fluffy",
+  color: "white",
+  size: null,
+  speak: function(line) {
+    console.log(`The ${this.type} named ${this.name} says '${line}'`);
+  }
+};
+// In this example, we create an object named rabbit with several properties: type, name, color, size, and speak.
+// The speak property is a function that logs a message to the console.
+
+rabbit.speak("Hello!"); // The rabbit named Fluffy says 'Hello!'
+// We can access the properties of an object using dot notation or bracket notation.
+console.log(rabbit.name); // Fluffy
+console.log(rabbit["color"]); // white
+// We can also add new properties to an object or modify existing ones.
+rabbit.size = "small";
+console.log(rabbit.size); // small
+// We can delete properties from an object using the delete operator.
+delete rabbit.color;
+console.log(rabbit.color); // undefined
+// We can check if an object has a specific property using the in operator.
+console.log("name" in rabbit); // true
+console.log("color" in rabbit); // false
+// We can iterate over the properties of an object using a for...in loop.
+for (let key in rabbit) {
+  console.log(`${key}: ${rabbit[key]}`);
+}
+// type: rabbit
+// name: Fluffy
+// size: small
+// speak: function(line) { ... }
+// We can also use Object.keys() to get an array of the object's property names.
+let keys = Object.keys(rabbit);
+console.log(keys); // ["type", "name", "size", "speak"]
+// We can use Object.values() to get an array of the object's property values.
+let values = Object.values(rabbit);
+console.log(values); // ["rabbit", "Fluffy", "small", function(line) { ... }]
+// We can use Object.entries() to get an array of the object's key-value pairs.
+let entries = Object.entries(rabbit);
+console.log(entries); // [["type", "rabbit"], ["name", "Fluffy"], ["size", "small"], ["speak", function(line) { ... }]]
+// Objects can also have methods, which are functions that are properties of the object.
+// We can call a method using dot notation or bracket notation.
+rabbit.speak("I am a method!"); // The rabbit named Fluffy says 'I am a method!'
+// We can also use the this keyword inside a method to refer to the object itself.
+let dog = {
+  type: "dog",
+  name: "Buddy",
+  speak: function(line) {
+    console.log(`The ${this.type} named ${this.name} says '${line}'`);
+  }
+};
+dog.speak("Woof!"); // The dog named Buddy says 'Woof!'
+// In this example, the speak method uses this.type and this.name to access the properties of the dog object.
+// This allows us to create methods that can work with different objects while still referring to their own properties.
+// Overall, objects are a fundamental part of JavaScript and are used extensively in both simple and complex applications.
+// They provide a way to organize and structure data, as well as encapsulate behavior through methods.
+// OBJECT PROTOTYPES
+// In JavaScript, every object has a prototype, which is another object that it inherits properties and methods from.
+// This allows us to create objects that share common behavior without having to duplicate code.
+let animal = {
+  speak: function(line) {
+    console.log(`The ${this.type} says '${line}'`);
+  }
+};
+let cat = Object.create(animal);
+cat.type = "cat";
+cat.speak("Meow!"); // The cat says 'Meow!'
+let dog2 = Object.create(animal);
+dog2.type = "dog";
+dog2.speak("Woof!"); // The dog says 'Woof!'
+// In this example, we create an object named animal with a speak method.
+// We then create two new objects, cat and dog2, using Object.create() to set their prototype to animal.
+// This allows both cat and dog2 to inherit the speak method from animal, while still having their own type property.
+// We can also add properties and methods to the prototype object, which will be available to all objects that inherit from it.
+animal.eat = function(food) {
+  console.log(`The ${this.type} eats ${food}`);
+};
+cat.eat("fish"); // The cat eats fish
+dog2.eat("bone"); // The dog eats bone
+// In this example, we add an eat method to the animal prototype.
+// Both cat and dog2 can now use this method, even though it was not defined directly on them.
+// We can also override properties and methods on individual objects, which will take precedence over the inherited ones.
+cat.speak = function(line) {
+  console.log(`The cat named ${this.name} says '${line}'`);
+}
+cat.name = "Whiskers";
+cat.speak("Purr!"); // The cat named Whiskers says 'Purr
+// dog2.speak("Bark!"); // The dog says 'Bark!'
+// In this example, we override the speak method on the cat object to provide a custom implementation.
+// The cat object now has its own speak method that uses the name property, while dog2 still uses the inherited speak method from animal.
+// Overall, prototypes are a powerful feature of JavaScript that allow us to create objects with shared behavior and properties.
+// They enable code reuse and help us organize our code in a more efficient way.
+// Understanding prototypes is essential for working with JavaScript objects and building complex applications.
+// OBJECT ORIENTATION
+// Object-oriented programming (OOP) is a programming paradigm that uses objects to represent data and behavior.
+// In JavaScript, we can create objects using constructor functions, which are special functions that are used to create and initialize new objects.
+function Animal(type, name) {
+  this.type = type;
+  this.name = name;
+}
+Animal.prototype.speak = function(line) {
+  console.log(`The ${this.type} named ${this.name} says '${line}'`);
+}
+let rabbit2 = new Animal("rabbit", "Thumper");
+rabbit2.speak("Hello!");
+// The rabbit named Thumper says 'Hello!'
+let dog3 = new Animal("dog", "Max");
+dog3.speak("Woof!");
+// The dog named Max says 'Woof!'
+// In this example, we define a constructor function named Animal that takes two parameters: type and name.
+// Inside the constructor, we use the this keyword to set the properties of the new object.
+// We also add a speak method to the Animal prototype, which will be available to all objects created using the Animal constructor.
+// We then create two new objects, rabbit2 and dog3, using the new keyword to call the Animal constructor.
+// Each object has its own type and name properties, and they can both use the speak method inherited from the Animal prototype.
+// We can also create subclasses by defining new constructor functions that inherit from existing ones.
+function Dog(name) {
+  Animal.call(this, "dog", name);
+}
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.fetch = function(item) {
+  console.log(`${this.name} fetches the ${item}`);
+}
+let dog4 = new Dog("Buddy");
+dog4.speak("Woof!"); // The dog named Buddy says 'Woof!'
+dog4.fetch("ball"); // Buddy fetches the ball
+// In this example, we define a new constructor function named Dog that inherits from the Animal constructor.
+// Inside the Dog constructor, we call the Animal constructor using Animal.call(this, "dog", name) to set the type and name properties.
+// We then set the Dog prototype to be an object created from the Animal prototype, and we set the constructor property to Dog.
+// Finally, we add a fetch method to the Dog prototype, which is specific to dogs.
+// We create a new Dog object named dog4 and demonstrate that it can use both the speak method inherited from Animal and the fetch method defined on Dog.
+// Overall, object-oriented programming in JavaScript allows us to create complex data structures and behaviors using objects and prototypes.
+// It promotes code reuse, encapsulation, and modularity, making it easier to build and maintain large applications.
